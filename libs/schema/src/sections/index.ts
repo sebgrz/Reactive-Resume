@@ -95,27 +95,137 @@ export type SectionItem = SectionWithItem["items"][number];
 export type CustomSectionGroup = z.infer<typeof customSchema>;
 
 // Defaults
+export const ALLOWED_LOCALE = ["en", "pl"] as const;
+export type AllowedLocale = (typeof ALLOWED_LOCALE)[number];
+
+const sectionsNames = {
+  summary: {
+    en: "Summary",
+    pl: "Podsumowanie",
+  },
+  awards: {
+    en: "Awards",
+    pl: "Nagrody",
+  },
+  certifications: {
+    en: "Certifications",
+    pl: "Certyfikaty",
+  },
+  education: {
+    en: "Education",
+    pl: "Edukacja",
+  },
+  experience: {
+    en: "Experience",
+    pl: "Doświadczenie",
+  },
+  volunteer: {
+    en: "Volunteering",
+    pl: "Wolontariat",
+  },
+  interests: {
+    en: "Interests",
+    pl: "Zainteresowania",
+  },
+  languages: {
+    en: "Languages",
+    pl: "Języki",
+  },
+  profiles: {
+    en: "Profiles",
+    pl: "Profile",
+  },
+  projects: {
+    en: "Projects",
+    pl: "Projekty",
+  },
+  publications: {
+    en: "Publications",
+    pl: "Publikacje",
+  },
+  references: {
+    en: "References",
+    pl: "Referencje",
+  },
+  skills: {
+    en: "Skills",
+    pl: "Umiejętności",
+  },
+};
+
 export const defaultSection: Section = {
   name: "",
   columns: 1,
   visible: true,
 };
 
-export const defaultSections: Sections = {
-  summary: { ...defaultSection, id: "summary", name: "Summary", content: "" },
-  awards: { ...defaultSection, id: "awards", name: "Awards", items: [] },
-  certifications: { ...defaultSection, id: "certifications", name: "Certifications", items: [] },
-  education: { ...defaultSection, id: "education", name: "Education", items: [] },
-  experience: { ...defaultSection, id: "experience", name: "Experience", items: [] },
-  volunteer: { ...defaultSection, id: "volunteer", name: "Volunteering", items: [] },
-  interests: { ...defaultSection, id: "interests", name: "Interests", items: [] },
-  languages: { ...defaultSection, id: "languages", name: "Languages", items: [] },
-  profiles: { ...defaultSection, id: "profiles", name: "Profiles", items: [] },
-  projects: { ...defaultSection, id: "projects", name: "Projects", items: [] },
-  publications: { ...defaultSection, id: "publications", name: "Publications", items: [] },
-  references: { ...defaultSection, id: "references", name: "References", items: [] },
-  skills: { ...defaultSection, id: "skills", name: "Skills", items: [] },
-  custom: {},
+export const defaultSections = (locale: AllowedLocale = "en"): Sections => {
+  return {
+    summary: { ...defaultSection, id: "summary", name: sectionsNames.summary[locale], content: "" },
+    awards: { ...defaultSection, id: "awards", name: sectionsNames.awards[locale], items: [] },
+    certifications: {
+      ...defaultSection,
+      id: "certifications",
+      name: sectionsNames.certifications[locale],
+      items: [],
+    },
+    education: {
+      ...defaultSection,
+      id: "education",
+      name: sectionsNames.education[locale],
+      items: [],
+    },
+    experience: {
+      ...defaultSection,
+      id: "experience",
+      name: sectionsNames.experience[locale],
+      items: [],
+    },
+    volunteer: {
+      ...defaultSection,
+      id: "volunteer",
+      name: sectionsNames.volunteer[locale],
+      items: [],
+    },
+    interests: {
+      ...defaultSection,
+      id: "interests",
+      name: sectionsNames.interests[locale],
+      items: [],
+    },
+    languages: {
+      ...defaultSection,
+      id: "languages",
+      name: sectionsNames.languages[locale],
+      items: [],
+    },
+    profiles: {
+      ...defaultSection,
+      id: "profiles",
+      name: sectionsNames.profiles[locale],
+      items: [],
+    },
+    projects: {
+      ...defaultSection,
+      id: "projects",
+      name: sectionsNames.projects[locale],
+      items: [],
+    },
+    publications: {
+      ...defaultSection,
+      id: "publications",
+      name: sectionsNames.publications[locale],
+      items: [],
+    },
+    references: {
+      ...defaultSection,
+      id: "references",
+      name: sectionsNames.references[locale],
+      items: [],
+    },
+    skills: { ...defaultSection, id: "skills", name: sectionsNames.skills[locale], items: [] },
+    custom: {},
+  };
 };
 
 export * from "./award";

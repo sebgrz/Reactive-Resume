@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { basicsSchema, defaultBasics } from "./basics";
 import { defaultMetadata, metadataSchema } from "./metadata";
-import { defaultSections, sectionsSchema } from "./sections";
+import { ALLOWED_LOCALE, AllowedLocale, defaultSections, sectionsSchema } from "./sections";
 
 // Schema
 export const resumeDataSchema = z.object({
@@ -15,10 +15,13 @@ export const resumeDataSchema = z.object({
 export type ResumeData = z.infer<typeof resumeDataSchema>;
 
 // Defaults
-export const defaultResumeData: ResumeData = {
-  basics: defaultBasics,
-  sections: defaultSections,
-  metadata: defaultMetadata,
+export const defaultResumeData = (locale: string): ResumeData => {
+  const localeOrigin = locale.slice(0, 2) as AllowedLocale; // en-EN -> en
+  return {
+    basics: defaultBasics,
+    sections: defaultSections(ALLOWED_LOCALE.includes(localeOrigin) ? localeOrigin : "en"),
+    metadata: defaultMetadata,
+  };
 };
 
 export * from "./basics";

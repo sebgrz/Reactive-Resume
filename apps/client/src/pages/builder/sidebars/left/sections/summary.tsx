@@ -11,7 +11,7 @@ import { SectionOptions } from "./shared/section-options";
 export const SummarySection = () => {
   const setValue = useResumeStore((state) => state.setValue);
   const section = useResumeStore(
-    (state) => state.resume.data.sections.summary ?? defaultSections.summary,
+    (state) => state.resume.data.sections.summary ?? defaultSections().summary,
   );
 
   return (

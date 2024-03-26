@@ -34,13 +34,13 @@ export class ResumeService {
     this.redis = this.redisService.getClient();
   }
 
-  async create(userId: string, createResumeDto: CreateResumeDto) {
+  async create(userId: string, userLocale: string, createResumeDto: CreateResumeDto) {
     const { name, email, picture } = await this.prisma.user.findUniqueOrThrow({
       where: { id: userId },
       select: { name: true, email: true, picture: true },
     });
 
-    const data = deepmerge(defaultResumeData, {
+    const data = deepmerge(defaultResumeData(userLocale), {
       basics: { name, email, picture: { url: picture ?? "" } },
     } satisfies DeepPartial<ResumeData>);
 

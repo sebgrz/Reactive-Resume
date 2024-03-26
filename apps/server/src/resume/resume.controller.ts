@@ -49,7 +49,7 @@ export class ResumeController {
   @UseGuards(TwoFactorGuard)
   async create(@User() user: UserEntity, @Body() createResumeDto: CreateResumeDto) {
     try {
-      return await this.resumeService.create(user.id, createResumeDto);
+      return await this.resumeService.create(user.id, user.locale, createResumeDto);
     } catch (error) {
       if (error instanceof PrismaClientKnownRequestError && error.code === "P2002") {
         throw new BadRequestException(ErrorMessage.ResumeSlugAlreadyExists);
