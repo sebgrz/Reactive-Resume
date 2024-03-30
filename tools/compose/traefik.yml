@@ -73,7 +73,7 @@ services:
 
       # -- URLs --
       PUBLIC_URL: http://example.com
-      STORAGE_URL: http://storage.example.com
+      STORAGE_URL: http://storage.example.com/default
 
       # -- Printer (Chrome) --
       CHROME_TOKEN: chrome_token
